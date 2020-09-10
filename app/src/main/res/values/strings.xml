@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">KKBox</string>
+    <string name="new_album">最新發行專輯</string>
+    <string name="featured_playlist">近期精選歌單</string>
 </resources>

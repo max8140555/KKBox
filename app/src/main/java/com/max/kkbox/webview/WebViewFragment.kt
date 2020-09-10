@@ -6,7 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.webkit.WebView
+import android.webkit.WebViewClient
+import androidx.lifecycle.ViewModelProvider
 import com.max.kkbox.R
+import com.max.kkbox.databinding.FragmentWebViewBinding
+import kotlinx.android.synthetic.main.fragment_web_view.*
 
 class WebViewFragment : Fragment() {
 
@@ -20,12 +25,17 @@ class WebViewFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        return inflater.inflate(R.layout.fragment_web_view, container, false)
+        val binding = FragmentWebViewBinding.inflate(inflater, container, false)
+
+        binding.wv.loadUrl("http://www.google.com")
+
+
+        return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(WebViewViewModel::class.java)
+        viewModel = ViewModelProvider(this).get(WebViewViewModel::class.java)
         // TODO: Use the ViewModel
     }
 
