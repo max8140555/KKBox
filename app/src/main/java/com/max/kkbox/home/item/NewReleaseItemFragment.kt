@@ -5,16 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
+import androidx.fragment.app.viewModels
 import com.max.kkbox.databinding.FragmentNewReleaseItemBinding
-import com.max.kkbox.home.HomeTypeFilter
+import com.max.kkbox.ext.getVmFactory
+
 
 
 
 class NewReleaseItemFragment() : Fragment() {
 
 
-//    private val viewModel by viewModels<ProfileItemViewModel> { getVmFactory(homeType) }
+    private val viewModel by viewModels<NewReleaseItemViewModel> { getVmFactory() }
 
     override fun onCreateView(
         inflater: LayoutInflater,
@@ -23,27 +24,8 @@ class NewReleaseItemFragment() : Fragment() {
     ): View? {
 
         val binding = FragmentNewReleaseItemBinding.inflate(inflater, container, false)
-//
-//        binding.lifecycleOwner = viewLifecycleOwner
-//
-//
-//        binding.recyclerProfileItem.adapter = adapter
-//        UserManager.myDate.observe(viewLifecycleOwner, Observer {
-//
-//            when (homeType) {
-//                HomeTypeFilter.NEW_RELEASE -> {
-//                    adapter.submitList(it.filter { date ->
-//                        date.active == true
-//                    })
-//                }
-//                else -> {
-//                    adapter.submitList(it.filter { date ->
-//                        date.active == false
-//                    })
-//                }
-//            }
-//        })
-//
+        binding.lifecycleOwner = viewLifecycleOwner
+
         return binding.root
     }
 
