@@ -5,7 +5,7 @@ import androidx.lifecycle.MutableLiveData
 
 
 interface MaxBoxDataSource {
-//    suspend fun getSelectEvent(greaterThan: Long, lessThan: Long): Result<List<CalendarEvent>>
+    suspend fun getNewReleaseAlbum(): MaxResult<List<Album>>
 //
 //    suspend fun postEvent(calendarEvent: CalendarEvent): Result<Boolean>
 //

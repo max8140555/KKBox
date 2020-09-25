@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'kotlin-kapt'
 
 android {
     compileSdkVersion 29
@@ -25,7 +26,11 @@ android {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
     buildTypes {
+        debug {
+            buildConfigField("Boolean", "LOGGER_VISIABLE", "true")
+        }
         release {
+            buildConfigField("Boolean", "LOGGER_VISIABLE", "false")
             minifyEnabled false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
         }
@@ -50,5 +55,18 @@ dependencies {
     implementation "androidx.navigation:navigation-fragment-ktx:$version_navigation"
     implementation "androidx.navigation:navigation-ui-ktx:$version_navigation"
 
+    // Moshi
+    implementation "com.squareup.moshi:moshi:$version_moshi"
+    implementation "com.squareup.moshi:moshi-kotlin:$version_moshi"
 
+    // Retrofit with Moshi Converter
+    implementation "com.squareup.retrofit2:retrofit:$version_retrofit"
+    implementation "com.squareup.retrofit2:converter-moshi:$version_retrofit"
+
+    // Retrofit Logging Interceptor
+    implementation("com.squareup.okhttp3:logging-interceptor:4.0.1")
+
+    //Glide
+    implementation "com.github.bumptech.glide:glide:$version_glide"
+    kapt "com.github.bumptech.glide:compiler:$version_glide"
 }

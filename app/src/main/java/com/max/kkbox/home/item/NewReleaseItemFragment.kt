@@ -14,7 +14,6 @@ import com.max.kkbox.ext.getVmFactory
 
 class NewReleaseItemFragment() : Fragment() {
 
-
     private val viewModel by viewModels<NewReleaseItemViewModel> { getVmFactory() }
 
     override fun onCreateView(
@@ -24,7 +23,13 @@ class NewReleaseItemFragment() : Fragment() {
     ): View? {
 
         val binding = FragmentNewReleaseItemBinding.inflate(inflater, container, false)
+
         binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel = viewModel
+
+        binding.recyclerNewAlbum.adapter = NewAlbumItemAdapter(NewAlbumItemAdapter.OnClickListener{
+
+        })
 
         return binding.root
     }

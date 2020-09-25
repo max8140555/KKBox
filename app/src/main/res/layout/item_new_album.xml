@@ -4,29 +4,34 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="album"
+            type="com.max.kkbox.data.Album" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
-        android:layout_width="wrap_content"
+        android:layout_width="106dp"
         android:layout_height="wrap_content">
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="90dp"
             android:layout_height="90dp"
+            android:background="@drawable/white_background"
+            app:albumImage="@{album.images.get(0).url}"
+            app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
         <TextView
             android:id="@+id/text_album_name"
             android:layout_width="90dp"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:gravity="center"
+            Tools:text="專輯名稱"
+            android:text="@{album.name}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/image"
-            Tools:text="專輯名稱" />
+            app:layout_constraintTop_toBottomOf="@+id/image" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

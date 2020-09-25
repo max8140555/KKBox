@@ -3,7 +3,9 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
-
+        <variable
+            name="viewModel"
+            type="com.max.kkbox.home.item.NewReleaseItemViewModel" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -38,26 +40,27 @@
             android:id="@+id/recycler_new_album"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginHorizontal="8dp"
+            android:layout_marginTop="16dp"
             android:orientation="horizontal"
-            android:layout_marginTop="32dp"
-            android:layout_marginStart="16dp"
+            app:albumItems="@{viewModel.listAlbum}"
             app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/text_new_album"/>
+            app:layout_constraintTop_toBottomOf="@+id/text_new_album" />
 
         <TextView
             android:id="@+id/text_featured_playlist"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginHorizontal="16dp"
-            android:layout_marginTop="32dp"
+            android:layout_marginTop="142dp"
             android:text="@string/featured_playlist"
             android:textSize="18sp"
             android:textStyle="bold"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/recycler_new_album" />
+            app:layout_constraintTop_toBottomOf="@+id/text_new_album" />
 
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/recycler_featured_playlist"

@@ -2,4 +2,7 @@
     <string name="app_name">KKBox</string>
     <string name="new_album">最新發行專輯</string>
     <string name="featured_playlist">近期精選歌單</string>
+
+    <string name="you_know_nothing">You know nothing</string>
+    <string name="internet_not_connected">您尚未連接 Internet</string>
 </resources>
