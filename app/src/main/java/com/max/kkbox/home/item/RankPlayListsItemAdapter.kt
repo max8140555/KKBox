@@ -10,8 +10,8 @@ import com.max.kkbox.data.PlayLists
 import com.max.kkbox.databinding.ItemFeaturedPlaylistBinding
 
 
-class PlayListsItemAdapter(private val onClickListener: OnClickListener) :
-    ListAdapter<PlayLists, PlayListsItemAdapter.PlayListsItemViewHolder>(
+class RankPlayListsItemAdapter(private val onClickListener: OnClickListener) :
+    ListAdapter<PlayLists, RankPlayListsItemAdapter.PlayListsItemViewHolder>(
         DiffCallback
     ) {
 

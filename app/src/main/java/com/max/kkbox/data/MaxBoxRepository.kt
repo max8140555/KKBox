@@ -5,4 +5,5 @@ interface MaxBoxRepository {
 
     suspend fun getFeaturedPlayLists(): MaxResult<List<PlayLists>>
 
+    suspend fun getRankPlayLists(): MaxResult<List<PlayLists>>
 }

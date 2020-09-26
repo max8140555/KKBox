@@ -28,7 +28,9 @@
                 <com.google.android.material.tabs.TabLayout
                     android:id="@+id/tabs_home"
                     android:layout_width="match_parent"
-                    android:layout_height="50dp" />
+                    android:layout_height="50dp"
+                    app:tabIndicatorFullWidth="false"
+                    app:tabIndicatorColor="@color/orange"/>
 
             </androidx.viewpager.widget.ViewPager>
 

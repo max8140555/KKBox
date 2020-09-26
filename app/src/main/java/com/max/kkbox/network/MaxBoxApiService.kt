@@ -1,7 +1,8 @@
 package com.max.kkbox.network
 
-import com.max.kkbox.data.FeaturedPlayListsResult
+
 import com.max.kkbox.data.NewReleaseAlbumResult
+import com.max.kkbox.data.PlayListsResult
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -50,10 +51,13 @@ interface MaxBoxApiService {
     suspend fun getFeaturedPlayLists(
         @Query("territory") territory: String = TERRITORY,
         @Header("Authorization") bearer: String? = BEARER_TOKEN
-    ): FeaturedPlayListsResult
+    ): PlayListsResult
 
-
-
+    @GET("charts")
+    suspend fun getRankPlayLists(
+        @Query("territory") territory: String = TERRITORY,
+        @Header("Authorization") bearer: String? = BEARER_TOKEN
+    ): PlayListsResult
 
 }
 

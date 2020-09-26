@@ -5,7 +5,7 @@ import com.squareup.moshi.Json
 import kotlinx.android.parcel.Parcelize
 
 @Parcelize
-data class FeaturedPlayListsResult(
+data class PlayListsResult(
     val data: List<PlayLists>,
     val paging: Paging,
     val summary: Summary,

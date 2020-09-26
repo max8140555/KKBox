@@ -74,8 +74,6 @@ class NewReleaseItemViewModel(private val maxBoxRepository: MaxBoxRepository) : 
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     _listAlbum.value = result.data
-                    Log.d("getAlbum","${result.data}")
-                    Log.d("getAlbumlist","${_listAlbum.value}")
                 }
                 is MaxResult.Fail -> {
                     _error.value = result.error
@@ -104,8 +102,6 @@ class NewReleaseItemViewModel(private val maxBoxRepository: MaxBoxRepository) : 
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     _playLists.value = result.data
-                    Log.d("PlayLists","${result.data}")
-                    Log.d("getPlayLists","${_playLists.value}")
                 }
                 is MaxResult.Fail -> {
                     _error.value = result.error

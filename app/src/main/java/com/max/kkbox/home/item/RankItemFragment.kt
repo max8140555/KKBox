@@ -27,11 +27,13 @@ class RankItemFragment() : Fragment() {
 
         val binding = FragmentRankItemBinding.inflate(inflater, container, false)
 
-//        binding.lifecycleOwner = viewLifecycleOwner
-//
-//        binding.recyclerFeaturedPlaylist.adapter = RankItemAdapter(RankItemAdapter.OnClickListener{
-//
-//        })
+        binding.lifecycleOwner = viewLifecycleOwner
+        binding.viewModel =viewModel
+
+
+        binding.recyclerRankPlaylist.adapter = RankPlayListsItemAdapter(RankPlayListsItemAdapter.OnClickListener{
+
+        })
         return binding.root
     }
 

@@ -1,7 +1,6 @@
 package com.max.kkbox.util
 
 
-import android.util.Log
 import android.widget.ImageView
 import androidx.core.net.toUri
 import androidx.databinding.BindingAdapter
@@ -12,13 +11,14 @@ import com.max.kkbox.R
 import com.max.kkbox.data.Album
 import com.max.kkbox.data.PlayLists
 import com.max.kkbox.home.item.NewAlbumItemAdapter
-import com.max.kkbox.home.item.PlayListsItemAdapter
+import com.max.kkbox.home.item.FeaturedPlayListsItemAdapter
+import com.max.kkbox.home.item.RankPlayListsItemAdapter
 
 
 @BindingAdapter("albumItems")
 fun bindRecyclerViewWithAlbumItems(recyclerView: RecyclerView, albumItems: List<Album>?) {
     albumItems?.let {
-        Log.d("9527","$albumItems")
+
         recyclerView.adapter?.apply {
             when (this) {
                 is NewAlbumItemAdapter -> {
@@ -29,13 +29,27 @@ fun bindRecyclerViewWithAlbumItems(recyclerView: RecyclerView, albumItems: List<
     }
 }
 
-@BindingAdapter("playListsItems")
-fun bindRecyclerViewWithPlayListsItems(recyclerView: RecyclerView, playListsItems: List<PlayLists>?) {
+@BindingAdapter("featuredPlayListsItems")
+fun bindRecyclerViewWithFeaturedPlayListsItems(recyclerView: RecyclerView, playListsItems: List<PlayLists>?) {
     playListsItems?.let {
-        Log.d("9527","$playListsItems")
+
         recyclerView.adapter?.apply {
             when (this) {
-                is PlayListsItemAdapter -> {
+                is FeaturedPlayListsItemAdapter -> {
+                    submitList(it)
+                }
+            }
+        }
+    }
+}
+
+@BindingAdapter("rankPlayListsItems")
+fun bindRecyclerViewWithRankPlayListsItems(recyclerView: RecyclerView, playListsItems: List<PlayLists>?) {
+    playListsItems?.let {
+
+        recyclerView.adapter?.apply {
+            when (this) {
+                is RankPlayListsItemAdapter -> {
                     submitList(it)
                 }
             }
@@ -52,6 +66,7 @@ fun bindImage(imgView: ImageView, imgUrl: String?) {
             .apply(
                 RequestOptions()
                     .placeholder(R.drawable.white_background))
+            .override(100, 100)
             .into(imgView)
     }
 }

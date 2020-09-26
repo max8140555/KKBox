@@ -31,7 +31,7 @@ class NewReleaseItemFragment() : Fragment() {
 
         })
 
-        binding.recyclerFeaturedPlaylist.adapter = PlayListsItemAdapter(PlayListsItemAdapter.OnClickListener{
+        binding.recyclerFeaturedPlaylist.adapter = FeaturedPlayListsItemAdapter(FeaturedPlayListsItemAdapter.OnClickListener{
 
         })
 
