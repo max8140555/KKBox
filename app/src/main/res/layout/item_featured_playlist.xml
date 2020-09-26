@@ -4,17 +4,20 @@
     xmlns:tools="http://schemas.android.com/tools">
 
     <data>
-
+        <variable
+            name="playLists"
+            type="com.max.kkbox.data.PlayLists" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="106dp">
 
         <ImageView
             android:id="@+id/image"
             android:layout_width="90dp"
             android:layout_height="90dp"
+            app:myImage="@{playLists.images.get(0).url}"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -24,10 +27,12 @@
             android:layout_height="45dp"
             android:layout_marginStart="8dp"
             android:gravity="center_vertical"
+            android:text="@{playLists.title}"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toEndOf="@+id/image"
             app:layout_constraintTop_toTopOf="parent"
             tools:text="專輯名稱" />
+
         <TextView
             android:id="@+id/text_context"
             android:layout_width="0dp"

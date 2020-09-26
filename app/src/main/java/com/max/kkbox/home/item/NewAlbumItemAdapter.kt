@@ -18,8 +18,6 @@ class NewAlbumItemAdapter(private val onClickListener: OnClickListener) :
         fun bind(album: Album) {
             binding.album = album
 
-
-
             binding.executePendingBindings()
         }
     }

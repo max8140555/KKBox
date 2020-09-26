@@ -8,7 +8,9 @@ import com.max.kkbox.R
 import com.max.kkbox.data.Album
 import com.max.kkbox.data.MaxBoxRepository
 import com.max.kkbox.data.MaxResult
+import com.max.kkbox.data.PlayLists
 import com.max.kkbox.network.LoadApiStatus
+import com.max.kkbox.util.Util
 import com.max.kkbox.util.Util.getString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -17,12 +19,15 @@ import kotlinx.coroutines.launch
 
 class NewReleaseItemViewModel(private val maxBoxRepository: MaxBoxRepository) : ViewModel() {
 
+    private val _playLists = MutableLiveData<List<PlayLists>>()
+
+    val playLists: LiveData<List<PlayLists>>
+        get() = _playLists
+
     private val _listAlbum = MutableLiveData<List<Album>>()
 
     val listAlbum: LiveData<List<Album>>
         get() = _listAlbum
-
-
 
     // Handle leave login
     private val _leave = MutableLiveData<Boolean>()
@@ -55,6 +60,7 @@ class NewReleaseItemViewModel(private val maxBoxRepository: MaxBoxRepository) : 
 
     init {
         getNewReleaseAlbumResult()
+        getFeaturedPlayListsResult()
     }
 
     private fun getNewReleaseAlbumResult() {
@@ -70,6 +76,36 @@ class NewReleaseItemViewModel(private val maxBoxRepository: MaxBoxRepository) : 
                     _listAlbum.value = result.data
                     Log.d("getAlbum","${result.data}")
                     Log.d("getAlbumlist","${_listAlbum.value}")
+                }
+                is MaxResult.Fail -> {
+                    _error.value = result.error
+                    _status.value = LoadApiStatus.ERROR
+                }
+                is MaxResult.Error -> {
+                    _error.value = result.exception.toString()
+                    _status.value = LoadApiStatus.ERROR
+                }
+                else -> {
+                    _error.value = getString(R.string.you_know_nothing)
+                    _status.value = LoadApiStatus.ERROR
+                }
+            }
+        }
+    }
+
+    private fun getFeaturedPlayListsResult() {
+
+        coroutineScope.launch {
+
+            _status.value = LoadApiStatus.LOADING
+            // It will return Result object after Deferred flow
+            when (val result = maxBoxRepository.getFeaturedPlayLists()){
+                is MaxResult.Success-> {
+                    _error.value = null
+                    _status.value = LoadApiStatus.DONE
+                    _playLists.value = result.data
+                    Log.d("PlayLists","${result.data}")
+                    Log.d("getPlayLists","${_playLists.value}")
                 }
                 is MaxResult.Fail -> {
                     _error.value = result.error

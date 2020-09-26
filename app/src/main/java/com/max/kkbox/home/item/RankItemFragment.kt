@@ -26,27 +26,12 @@ class RankItemFragment() : Fragment() {
     ): View? {
 
         val binding = FragmentRankItemBinding.inflate(inflater, container, false)
-//
+
 //        binding.lifecycleOwner = viewLifecycleOwner
 //
+//        binding.recyclerFeaturedPlaylist.adapter = RankItemAdapter(RankItemAdapter.OnClickListener{
 //
-//        binding.recyclerProfileItem.adapter = adapter
-//        UserManager.myDate.observe(viewLifecycleOwner, Observer {
-//
-//            when (homeType) {
-//                HomeTypeFilter.NEW_RELEASE -> {
-//                    adapter.submitList(it.filter { date ->
-//                        date.active == true
-//                    })
-//                }
-//                else -> {
-//                    adapter.submitList(it.filter { date ->
-//                        date.active == false
-//                    })
-//                }
-//            }
 //        })
-//
         return binding.root
     }
 

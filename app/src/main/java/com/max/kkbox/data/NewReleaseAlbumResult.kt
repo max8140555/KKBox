@@ -18,7 +18,7 @@ data class Paging(
     val offset: Int,
     val limit: Int,
     val previous: String?,
-    val next: String
+    val next: String?
 ) : Parcelable
 
 @Parcelize
