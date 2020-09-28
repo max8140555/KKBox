@@ -17,4 +17,12 @@ class DefaultMaxBoxRepository(private val remoteDataSource: MaxBoxDataSource
         return remoteDataSource.getRankPlayLists()
     }
 
+    override suspend fun getChartsTracks(id: String): MaxResult<List<Tracks>> {
+        return remoteDataSource.getChartsTracks(id)
+    }
+
+    override suspend fun getAlbumsTracks(id: String): MaxResult<List<Tracks>> {
+        return remoteDataSource.getAlbumsTracks(id)
+    }
+
 }

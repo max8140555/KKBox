@@ -3,6 +3,7 @@ package com.max.kkbox.network
 
 import com.max.kkbox.data.NewReleaseAlbumResult
 import com.max.kkbox.data.PlayListsResult
+import com.max.kkbox.data.TracksResult
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
 import okhttp3.OkHttpClient
@@ -59,11 +60,21 @@ interface MaxBoxApiService {
         @Header("Authorization") bearer: String? = BEARER_TOKEN
     ): PlayListsResult
 
+    @GET("charts/{ID}/tracks")
+    suspend fun getChartsTracks(
+        @Path("ID") Id: String,
+        @Query("territory") territory: String = TERRITORY,
+        @Header("Authorization") bearer: String? = BEARER_TOKEN
+    ): TracksResult
+
+    @GET("albums/{ID}/tracks")
+    suspend fun getAlbumsTracks(
+        @Path("ID") Id: String,
+        @Query("territory") territory: String = TERRITORY,
+        @Header("Authorization") bearer: String? = BEARER_TOKEN
+    ): TracksResult
 }
 
-/**
- * A public Api object that exposes the lazy-initialized Retrofit service
- */
 object MaxBoxApi {
     val retrofitService: MaxBoxApiService by lazy { retrofit.create(MaxBoxApiService::class.java) }
 }

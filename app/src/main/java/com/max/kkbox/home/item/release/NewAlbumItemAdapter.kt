@@ -1,4 +1,4 @@
-package com.max.kkbox.home.item
+package com.max.kkbox.home.item.release
 
 import android.view.LayoutInflater
 import android.view.ViewGroup

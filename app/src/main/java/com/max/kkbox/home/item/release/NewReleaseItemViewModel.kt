@@ -1,6 +1,6 @@
-package com.max.kkbox.home.item
+package com.max.kkbox.home.item.release
 
-import android.util.Log
+
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -10,7 +10,6 @@ import com.max.kkbox.data.MaxBoxRepository
 import com.max.kkbox.data.MaxResult
 import com.max.kkbox.data.PlayLists
 import com.max.kkbox.network.LoadApiStatus
-import com.max.kkbox.util.Util
 import com.max.kkbox.util.Util.getString
 import kotlinx.coroutines.CoroutineScope
 import kotlinx.coroutines.Dispatchers
@@ -29,25 +28,24 @@ class NewReleaseItemViewModel(private val maxBoxRepository: MaxBoxRepository) : 
     val listAlbum: LiveData<List<Album>>
         get() = _listAlbum
 
-    // Handle leave login
-    private val _leave = MutableLiveData<Boolean>()
+    private val _navigateToAlbumSongList = MutableLiveData<Album>()
+    val navigateToAlbumSongList: LiveData<Album>
+        get() = _navigateToAlbumSongList
 
-    val leave: LiveData<Boolean>
-        get() = _leave
+    private val _navigateToPlayListsSongList = MutableLiveData<PlayLists>()
+    val navigateToPlayListsSongList: LiveData<PlayLists>
+        get() = _navigateToPlayListsSongList
 
-    // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
 
     val status: LiveData<LoadApiStatus>
         get() = _status
 
-    // error: The internal MutableLiveData that stores the error of the most recent request
     private val _error = MutableLiveData<String>()
 
     val error: LiveData<String>
         get() = _error
 
-    // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
 
     // the Coroutine runs using the Main (UI) dispatcher
@@ -119,4 +117,16 @@ class NewReleaseItemViewModel(private val maxBoxRepository: MaxBoxRepository) : 
         }
     }
 
+    fun displayAlbumSongList(album: Album) {
+        _navigateToAlbumSongList.value= album
+    }
+
+    fun displayPlayListsSongList(playLists: PlayLists) {
+        _navigateToPlayListsSongList.value= playLists
+    }
+
+    fun navigationLeave(){
+        _navigateToAlbumSongList.value = null
+        _navigateToPlayListsSongList.value= null
+    }
 }

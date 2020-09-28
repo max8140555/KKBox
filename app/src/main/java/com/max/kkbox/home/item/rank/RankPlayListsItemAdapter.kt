@@ -1,4 +1,4 @@
-package com.max.kkbox.home.item
+package com.max.kkbox.home.item.rank
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -17,7 +17,6 @@ class RankPlayListsItemAdapter(private val onClickListener: OnClickListener) :
 
     class PlayListsItemViewHolder(private var binding: ItemFeaturedPlaylistBinding) :
         RecyclerView.ViewHolder(binding.root) {
-
 
         @SuppressLint("SetTextI18n")
         fun bind(playLists: PlayLists) {

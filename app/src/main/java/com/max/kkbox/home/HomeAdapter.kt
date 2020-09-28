@@ -3,8 +3,8 @@ package com.max.kkbox.home
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentStatePagerAdapter
-import com.max.kkbox.home.item.NewReleaseItemFragment
-import com.max.kkbox.home.item.RankItemFragment
+import com.max.kkbox.home.item.release.NewReleaseItemFragment
+import com.max.kkbox.home.item.rank.RankItemFragment
 
 class HomeAdapter(fragmentManager: FragmentManager) :
     FragmentStatePagerAdapter(fragmentManager, BEHAVIOR_RESUME_ONLY_CURRENT_FRAGMENT) {

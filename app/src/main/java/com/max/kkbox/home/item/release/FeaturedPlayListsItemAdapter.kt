@@ -1,4 +1,4 @@
-package com.max.kkbox.home.item
+package com.max.kkbox.home.item.release
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
@@ -18,13 +18,12 @@ class FeaturedPlayListsItemAdapter(private val onClickListener: OnClickListener)
     class PlayListsItemViewHolder(private var binding: ItemFeaturedPlaylistBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
-
         @SuppressLint("SetTextI18n")
         fun bind(playLists: PlayLists) {
-            val splitUpdate = playLists.updatedAt.split("T")
+
             binding.playLists = playLists
 
-
+            val splitUpdate = playLists.updatedAt.split("T")
             binding.textContext.text = "${playLists.owner.name}@${splitUpdate[0]}"
 
 

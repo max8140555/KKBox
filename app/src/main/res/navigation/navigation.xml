@@ -8,16 +8,36 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.max.kkbox.home.HomeFragment"
-        android:label="fragment_home"
-        tools:layout="@layout/fragment_home" />
+        android:label="HomeFragment" />
+
     <fragment
         android:id="@+id/songListFragment"
         android:name="com.max.kkbox.songlist.SongListFragment"
-        android:label="fragment_song_list"
-        tools:layout="@layout/fragment_song_list" />
+        android:label="SongListFragment">
+
+        <argument
+            android:name="albumKey"
+            app:argType="com.max.kkbox.data.Album"
+            app:nullable="true" />
+        <argument
+            android:name="playListsKey"
+            app:argType="com.max.kkbox.data.PlayLists"
+            app:nullable="true" />
+    </fragment>
+
     <fragment
         android:id="@+id/webViewFragment"
         android:name="com.max.kkbox.webview.WebViewFragment"
-        android:label="fragment_web_view"
-        tools:layout="@layout/fragment_web_view" />
+        android:label="WebViewFragment">
+        <argument
+            android:name="tracksKey"
+            app:argType="com.max.kkbox.data.Tracks" />
+    </fragment>
+
+    <action android:id="@+id/action_global_songListFragment"
+        app:destination="@id/songListFragment"/>
+
+    <action android:id="@+id/action_global_webViewFragment"
+        app:destination="@id/webViewFragment"/>
+
 </navigation>

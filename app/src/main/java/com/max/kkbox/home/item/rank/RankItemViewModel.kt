@@ -1,11 +1,10 @@
-package com.max.kkbox.home.item
+package com.max.kkbox.home.item.rank
 
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.max.kkbox.R
-import com.max.kkbox.data.Album
 import com.max.kkbox.data.MaxBoxRepository
 import com.max.kkbox.data.MaxResult
 import com.max.kkbox.data.PlayLists
@@ -23,28 +22,18 @@ class RankItemViewModel(private val maxBoxRepository: MaxBoxRepository) : ViewMo
     val playLists: LiveData<List<PlayLists>>
         get() = _playLists
 
-    // Handle leave login
-    private val _leave = MutableLiveData<Boolean>()
-
-    val leave: LiveData<Boolean>
-        get() = _leave
-
-    // status: The internal MutableLiveData that stores the status of the most recent request
     private val _status = MutableLiveData<LoadApiStatus>()
 
     val status: LiveData<LoadApiStatus>
         get() = _status
 
-    // error: The internal MutableLiveData that stores the error of the most recent request
     private val _error = MutableLiveData<String>()
 
     val error: LiveData<String>
         get() = _error
 
-    // Create a Coroutine scope using a job to be able to cancel when needed
     private var viewModelJob = Job()
 
-    // the Coroutine runs using the Main (UI) dispatcher
     private val coroutineScope = CoroutineScope(viewModelJob + Dispatchers.Main)
 
     override fun onCleared() {
@@ -67,8 +56,6 @@ class RankItemViewModel(private val maxBoxRepository: MaxBoxRepository) : ViewMo
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     _playLists.value = result.data
-                    Log.d("PlayLists","${result.data}")
-                    Log.d("getPlayLists","${_playLists.value}")
                 }
                 is MaxResult.Fail -> {
                     _error.value = result.error
