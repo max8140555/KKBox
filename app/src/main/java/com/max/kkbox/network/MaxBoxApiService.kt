@@ -38,7 +38,6 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 
-
 interface MaxBoxApiService {
 
     @GET("new-release-categories/{ID}/albums")
@@ -51,6 +50,8 @@ interface MaxBoxApiService {
     @GET("featured-playlists")
     suspend fun getFeaturedPlayLists(
         @Query("territory") territory: String = TERRITORY,
+        @Query("offset") offset: Int,
+        @Query("limit") limit: Int? = 10,
         @Header("Authorization") bearer: String? = BEARER_TOKEN
     ): PlayListsResult
 

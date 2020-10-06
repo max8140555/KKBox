@@ -7,9 +7,11 @@ apply plugin: "androidx.navigation.safeargs.kotlin"
 android {
     compileSdkVersion 29
     buildToolsVersion "29.0.3"
+
     dataBinding {
         enabled = true
     }
+
     defaultConfig {
         applicationId "com.max.kkbox"
         minSdkVersion 19
@@ -26,6 +28,7 @@ android {
     kotlinOptions {
         jvmTarget = JavaVersion.VERSION_1_8.toString()
     }
+    
     buildTypes {
         debug {
             buildConfigField("Boolean", "LOGGER_VISIABLE", "true")

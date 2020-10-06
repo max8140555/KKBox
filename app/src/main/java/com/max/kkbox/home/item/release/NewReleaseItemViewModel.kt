@@ -1,6 +1,7 @@
 package com.max.kkbox.home.item.release
 
 
+import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
@@ -17,6 +18,8 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.launch
 
 class NewReleaseItemViewModel(private val maxBoxRepository: MaxBoxRepository) : ViewModel() {
+
+    var inputOffset: Int? = 0
 
     private val _playLists = MutableLiveData<List<PlayLists>>()
 
@@ -58,7 +61,7 @@ class NewReleaseItemViewModel(private val maxBoxRepository: MaxBoxRepository) : 
 
     init {
         getNewReleaseAlbumResult()
-        getFeaturedPlayListsResult()
+        getFeaturedPlayListsResult(inputOffset)
     }
 
     private fun getNewReleaseAlbumResult() {
@@ -67,8 +70,8 @@ class NewReleaseItemViewModel(private val maxBoxRepository: MaxBoxRepository) : 
 
             _status.value = LoadApiStatus.LOADING
             // It will return Result object after Deferred flow
-            when (val result = maxBoxRepository.getNewReleaseAlbum()){
-                is MaxResult.Success-> {
+            when (val result = maxBoxRepository.getNewReleaseAlbum()) {
+                is MaxResult.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
                     _listAlbum.value = result.data
@@ -89,17 +92,25 @@ class NewReleaseItemViewModel(private val maxBoxRepository: MaxBoxRepository) : 
         }
     }
 
-    private fun getFeaturedPlayListsResult() {
+    fun getFeaturedPlayListsResult(offset: Int?, oldData: List<PlayLists>? = null) {
 
         coroutineScope.launch {
 
             _status.value = LoadApiStatus.LOADING
             // It will return Result object after Deferred flow
-            when (val result = maxBoxRepository.getFeaturedPlayLists()){
-                is MaxResult.Success-> {
+            when (val result = offset?.let { maxBoxRepository.getFeaturedPlayLists(it) }) {
+                is MaxResult.Success -> {
                     _error.value = null
                     _status.value = LoadApiStatus.DONE
-                    _playLists.value = result.data
+
+                    _playLists.value = when (oldData) {
+                        null -> result.data.data
+                        else -> oldData + result.data.data
+                    }
+
+                    val splitNext = result.data.paging.next?.split("&")
+                    val splitAgain = splitNext?.get(1)?.split("offset=")
+                    inputOffset = splitAgain?.get(1)?.toInt()
                 }
                 is MaxResult.Fail -> {
                     _error.value = result.error
@@ -118,15 +129,15 @@ class NewReleaseItemViewModel(private val maxBoxRepository: MaxBoxRepository) : 
     }
 
     fun displayAlbumSongList(album: Album) {
-        _navigateToAlbumSongList.value= album
+        _navigateToAlbumSongList.value = album
     }
 
     fun displayPlayListsSongList(playLists: PlayLists) {
-        _navigateToPlayListsSongList.value= playLists
+        _navigateToPlayListsSongList.value = playLists
     }
 
-    fun navigationLeave(){
+    fun navigationLeave() {
         _navigateToAlbumSongList.value = null
-        _navigateToPlayListsSongList.value= null
+        _navigateToPlayListsSongList.value = null
     }
 }

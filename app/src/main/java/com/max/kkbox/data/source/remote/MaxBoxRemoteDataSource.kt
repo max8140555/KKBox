@@ -34,19 +34,19 @@ object MaxBoxRemoteDataSource : MaxBoxDataSource {
         }
     }
 
-    override suspend fun getFeaturedPlayLists(): MaxResult<List<PlayLists>> {
+    override suspend fun getFeaturedPlayLists(offset: Int): MaxResult<PlayListsResult> {
         if (!isInternetConnected()) {
             return MaxResult.Fail(getString(R.string.internet_not_connected))
         }
 
         return try {
             // this will run on a thread managed by Retrofit
-            val listResult = MaxBoxApi.retrofitService.getFeaturedPlayLists()
+            val listResult = MaxBoxApi.retrofitService.getFeaturedPlayLists(offset = offset)
 
             listResult.error?.let {
                 return MaxResult.Fail(it.message)
             }
-            MaxResult.Success(listResult.data)
+            MaxResult.Success(listResult)
 
         } catch (e: Exception) {
             Logger.w("[${this::class.simpleName}] exception=${e.message}")

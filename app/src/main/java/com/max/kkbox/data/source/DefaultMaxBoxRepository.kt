@@ -9,8 +9,8 @@ class DefaultMaxBoxRepository(private val remoteDataSource: MaxBoxDataSource
         return remoteDataSource.getNewReleaseAlbum()
     }
 
-    override suspend fun getFeaturedPlayLists(): MaxResult<List<PlayLists>> {
-        return remoteDataSource.getFeaturedPlayLists()
+    override suspend fun getFeaturedPlayLists(offset: Int): MaxResult<PlayListsResult> {
+        return remoteDataSource.getFeaturedPlayLists(offset)
     }
 
     override suspend fun getRankPlayLists(): MaxResult<List<PlayLists>> {
